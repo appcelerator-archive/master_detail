@@ -1,0 +1,9 @@
+".container" : {
+	backgroundColor:'#e3e3e3'
+},
+"#label": {
+	text:'Please select an item',
+	height:'auto',
+	width:'auto',
+	color:'#000'
+}
