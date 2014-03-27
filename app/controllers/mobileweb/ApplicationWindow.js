@@ -1,4 +1,4 @@
 var args = arguments[0] || {};
-var App = require('core');
 
+//Adding the navgroup to master view to be used to open the details view.
 $.masterView.navGroup = $.navGroup;

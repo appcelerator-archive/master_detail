@@ -77,6 +77,7 @@ var App = {
 		App.getDeviceDimensions();
 		
 		var win = null;
+		//Check for the device type for opening the respective windows.
 		if(App.isTablet()){
 			win = Alloy.createController('tablet/ApplicationWindow').getView();
 		} else{
@@ -115,28 +116,28 @@ var App = {
 		} else {
 			controller = _controller;
 		}
-
-		var controllerView = controller.getView();
-		if (App.isTablet()) {
-			return controller;
-		} else {
-			var window = _controllerArguments && _controllerArguments.win ? _controllerArguments.win : Ti.UI.createWindow({
-				title: _controllerArguments.title || '',
-				backgroundColor: 'white'
-			});
-			
-			window.add(controllerView);
-			
-			if (_controllerArguments && _controllerArguments.navGroup) {
-				if(_controllerArguments.navGroup.openWindow){
-					_controllerArguments.navGroup.openWindow(window);
-				} else{
-					_controllerArguments.navGroup.open(window);
-				}
-			} else if(!(_controllerArguments && _controllerArguments.win)){
-				window.open();
+		
+		//Creating a container window for the new controller view
+		var window = Ti.UI.createWindow({
+			title : _controllerArguments.title || '',
+			backgroundColor : 'white'
+		});
+		window.add(controller.getView());
+		
+		//Opening the screen as per the platform
+		if (_controllerArguments && _controllerArguments.navGroup) {
+			if (OS_IOS) {
+				//Opening the window as per iOS specification
+				_controllerArguments.navGroup.openWindow(window);
+			} else {
+				//Opening the window as per mobileWeb specification
+				_controllerArguments.navGroup.open(window);
 			}
+		} else {
+			//Opening the window as per android specification
+			window.open();
 		}
+
 	},
 	/**
 	 * Helper to bind the orientation events to a controller. These get added automatically
