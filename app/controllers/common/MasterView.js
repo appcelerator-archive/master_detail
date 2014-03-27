@@ -13,7 +13,7 @@ var tableData = [
 
 $.table.setData(tableData);
 
-/* Method to select an item and update text for details view.
+/* Click Event listener of table to select an item
  * Check if there is a method to update the text (in case of tablet), 
  * else case will be used for handheld devices as new screen is opened on every product selection.
  * */

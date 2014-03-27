@@ -101,8 +101,9 @@ var App = {
 	 * example which auto-adds a window to the controller.
 	 * More could be added here depending on the navigation requirements.
 	 * For instance, if you have a navgroup for handheld, you could open it in that
-	 * for iOS and differently in Android, etc.  The point is, managing your
-	 * app navigation flow in one spot is a good idea.
+	 * for iOS and differently in Android, etc. If navgroup is not passed for handheld iOS,
+	 * it is opened differently in case of iOS. The point is, managing your app navigation 
+	 * flow in one spot is a good idea.
 	 *
 	 * @param {Controllers/String} _controller
 	 * @param {Object} _controllerArguments The arguments for the controller (optional)
@@ -129,7 +130,7 @@ var App = {
 			if (OS_IOS) {
 				//Opening the window as per iOS specification
 				_controllerArguments.navGroup.openWindow(window);
-			} else {
+			} else if(OS_MOBILEWEB) {
 				//Opening the window as per mobileWeb specification
 				_controllerArguments.navGroup.open(window);
 			}
