@@ -1,6 +1,6 @@
-
-".container" : {
-  
+".container": {
+	backgroundColor: 'white',
+	exitOnClose:true
 },
 "#leftContainer":{
 	top:0,
