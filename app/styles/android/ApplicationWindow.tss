@@ -1,6 +1,0 @@
-"#win" : {
-	title:'Products',
-	exitOnClose:true,
-	navBarHidden:false,
-	backgroundColor:'#ffffff'
-}

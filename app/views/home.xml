@@ -1,0 +1,22 @@
+<Alloy>
+	<!-- iOS handheld specific -->
+	<NavigationWindow id="navGroup" platform="ios">
+		<Window id="rootWindow" title="Products">
+			<View id="contentWrapper"></View>
+		</Window>
+	</NavigationWindow>
+
+	<!-- Android handheld specific -->
+	<Window id="window" platform="android">
+		<View id="contentWrapper"></View>
+	</Window>
+
+	<!-- Mobileweb specific -->
+	<Window id="window" platform="mobileweb">
+		<NavigationGroup id="navGroup">
+			<Window id="rootWindow">
+				<View id="contentWrapper"></View>
+			</Window>
+		</NavigationGroup>
+	</Window>
+</Alloy>

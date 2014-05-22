@@ -9,3 +9,19 @@
 // object. For example:
 //
 // Alloy.Globals.someGlobalFunction = function(){};
+
+//Function to check the platform form factor is tablet
+Alloy.isTablet = function() {
+	switch (Ti.Platform.osname) {
+		case 'ipad':
+			return true;
+		case 'mobileweb':
+			return false;
+		case 'android':
+			var psc = Ti.Platform.Android.physicalSizeCategory;
+			var tiAndroid = Ti.Platform.Android;
+			return psc === tiAndroid.PHYSICAL_SIZE_CATEGORY_LARGE || psc === tiAndroid.PHYSICAL_SIZE_CATEGORY_XLARGE;
+		default:
+			return Math.min(Ti.Platform.displayCaps.platformHeight, Ti.Platform.displayCaps.platformWidth) >= 400;
+	};
+}; 

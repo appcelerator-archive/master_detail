@@ -1,0 +1,21 @@
+"#navGroup": {
+	width: "100%",
+	height: "100%"
+},
+"#window": {
+	width: "100%",
+	height: "100%",
+	exitOnClose: true,
+	backgroundColor: "#fff"
+},
+"#rootWindow[platform=ios]": {
+	width: "100%",
+	height: "100%",
+    color: "#fff",
+    backgroundColor: "#fff"
+},
+"#contentWrapper[platform=android]": {
+	backgroundColor: "#fff",
+	width: "100%",
+	height: "100%"
+}

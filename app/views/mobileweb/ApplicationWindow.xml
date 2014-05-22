@@ -1,9 +1,0 @@
-<Alloy>
-	<Window>
-		<NavigationGroup id="navGroup" >
-			<Window id="root">
-				<Require id="masterView" src="common/MasterView"></Require>
-			</Window>
-		</NavigationGroup>
-	</Window>
-</Alloy>

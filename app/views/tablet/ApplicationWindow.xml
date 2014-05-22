@@ -1,6 +1,0 @@
-<Alloy>
-	<Window class="container">
-		<View id="leftContainer"/>
-		<View id="rightContainer"/>
-	</Window>
-</Alloy>

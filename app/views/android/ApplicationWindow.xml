@@ -1,5 +1,0 @@
-<Alloy>
-	<Window id="win">
-		<Require id="masterView" src="common/MasterView"></Require>
-	</Window>
-</Alloy>

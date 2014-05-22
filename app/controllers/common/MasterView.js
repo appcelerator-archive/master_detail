@@ -18,8 +18,8 @@ $.table.setData(tableData);
  * else case will be used for handheld devices as new screen is opened on every product selection.
  * */
 function selectItem(e) {
-	if (args.updateText) {
-		args.updateText({
+	if ($.updateText) {
+		$.updateText({
 			name : e.rowData.title,
 			price : e.rowData.price
 		});

@@ -69,21 +69,29 @@ var App = {
 		Ti.App.addEventListener("resumed", App.resume);
 		Ti.Gesture.addEventListener("orientationchange", App.orientationChange);
 
-		if(OS_ANDROID) {
+		if (OS_ANDROID) {
 			Ti.Android.currentActivity.addEventListener("resume", App.resume);
 		}
 
 		// Get device dimensions
 		App.getDeviceDimensions();
-		
-		var win = null;
-		//Check for the device type for opening the respective windows.
-		if(App.isTablet()){
-			win = Alloy.createController('tablet/ApplicationWindow').getView();
-		} else{
-			win = Alloy.createController('ApplicationWindow').getView();
+
+		App.HomeController = !Alloy.isTablet() ? Alloy.createController("home") : Alloy.createController("tablet/home");
+		App.GlobalWindow = App.HomeController.rootWindow;
+		App.NavGroup = App.HomeController.navGroup;
+
+		// Push the window back up for iOS 6 and lower
+		if (App.versionMajor < 7) {
+			App.GlobalWindow.top = 0;
 		}
-		win.open();
+
+		// set initial controller
+		App.currentController = "Master";
+		if (App.NavGroup && !OS_MOBILEWEB) {
+			App.NavGroup.open();
+		} else {
+			App.HomeController.window.open();
+		}
 	},
 	/**
 	 * Handle cross platform way of opening a main screen.
@@ -116,28 +124,28 @@ var App = {
 		} else {
 			controller = _controller;
 		}
-		
-		//Creating a container window for the new controller view
-		var window = Ti.UI.createWindow({
-			title : _controllerArguments.title || '',
-			backgroundColor : 'white'
-		});
-		window.add(controller.getView());
-		
-		//Opening the screen as per the platform
-		if (_controllerArguments && _controllerArguments.navGroup) {
-			if (OS_IOS) {
-				//Opening the window as per iOS specification
-				_controllerArguments.navGroup.openWindow(window);
-			} else if(OS_MOBILEWEB) {
-				//Opening the window as per mobileWeb specification
-				_controllerArguments.navGroup.open(window);
-			}
-		} else {
-			//Opening the window as per android specification
-			window.open();
-		}
 
+		if (App.isTablet()) {
+			return controller;
+		} else {
+			controller.window = Ti.UI.createWindow({
+				title: _controllerArguments.title || '',
+				backgroundColor: 'white'
+			});
+			
+			controller.window.add(controller.wrapper);
+			
+			// Cross platform open window handling
+			if(App.NavGroup) {
+				if(App.NavGroup.openWindow){
+					App.NavGroup.openWindow(controller.window);
+				} else{
+					App.NavGroup.open(controller.window);
+				}
+			} else {
+				controller.window.open();
+			}
+		}
 	},
 	/**
 	 * Helper to bind the orientation events to a controller. These get added automatically
