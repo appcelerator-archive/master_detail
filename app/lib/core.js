@@ -141,6 +141,14 @@ var App = {
 					App.NavGroup.openWindow(controller.window);
 				} else{
 					App.NavGroup.open(controller.window);
+					App.NavGroup.addEventListener('click', closeWin);
+					//Close Event Listener for mobileweb
+					function closeWin(e){
+						if (e.source == '[object TiUIView]') {
+							App.NavGroup.close(controller.window);
+							App.NavGroup.removeEventListener('click', closeWin);
+						}
+					}
 				}
 			} else {
 				controller.window.open();
